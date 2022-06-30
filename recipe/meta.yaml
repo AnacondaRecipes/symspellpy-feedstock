@@ -1,0 +1,41 @@
+{% set name = "symspellpy" %}
+{% set version = "6.7.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/symspellpy-{{ version }}.tar.gz
+  sha256: 3f96149a424411fb5f292a15a650a17ccf8d4946c61e06eae6bf7f9ebcd67ba8
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - pip
+    - python >=3.6
+  run:
+    - editdistpy >=0.1.3
+    - python >=3.6
+
+test:
+  imports:
+    - symspellpy
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/mammothb/symspellpy
+  summary: Python SymSpell
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - bkreider
